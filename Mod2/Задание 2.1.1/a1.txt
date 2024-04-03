@@ -1,0 +1,116 @@
+// Родительский класс: Космическое тело
+class CelestialBody {
+    // Общие свойства для всех космических тел
+    protected String name;
+    protected double mass;
+    protected double radius;
+    
+    // Конструктор
+    public CelestialBody(String name, double mass, double radius) {
+        this.name = name;
+        this.mass = mass;
+        this.radius = radius;
+    }
+    
+    // Методы
+    public String getName() {
+        return name;
+    }
+    
+    public double getMass() {
+        return mass;
+    }
+    
+    public double getRadius() {
+        return radius;
+    }
+    
+    // Полиморфный метод для вывода информации о космическом теле
+    public void printInfo() {
+        System.out.println("Название: " + name);
+        System.out.println("Масса: " + mass + " кг");
+        System.out.println("Радиус: " + radius + " км");
+    }
+}
+
+// Класс наследник: Планета
+class Planet extends CelestialBody {
+    // Дополнительные свойства для планеты
+    private double distanceFromSun;
+    private double orbitalPeriod;
+    
+    // Конструктор
+    public Planet(String name, double mass, double radius, double distanceFromSun, double orbitalPeriod) {
+        super(name, mass, radius);
+        this.distanceFromSun = distanceFromSun;
+        this.orbitalPeriod = orbitalPeriod;
+    }
+    
+    // Методы
+    public double getDistanceFromSun() {
+        return distanceFromSun;
+    }
+    
+    public double getOrbitalPeriod() {
+        return orbitalPeriod;
+    }
+    
+    // Переопределение метода printInfo для планеты
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Расстояние от Солнца: " + distanceFromSun + " миллионов км");
+        System.out.println("Орбитальный период: " + orbitalPeriod + " земных дней");
+    }
+}
+
+// Класс наследник: Звезда
+class Star extends CelestialBody {
+    // Дополнительные свойства для звезды
+    private String spectralClass;
+    private double luminosity;
+    
+    // Конструктор
+    public Star(String name, double mass, double radius, String spectralClass, double luminosity) {
+        super(name, mass, radius);
+        this.spectralClass = spectralClass;
+        this.luminosity = luminosity;
+    }
+    
+    // Методы
+    public String getSpectralClass() {
+        return spectralClass;
+    }
+    
+    public double getLuminosity() {
+        return luminosity;
+    }
+    
+    // Переопределение метода printInfo для звезды
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Спектральный класс: " + spectralClass);
+        System.out.println("Светимость: " + luminosity + " раз светимость Солнца");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов различных космических тел в солнечной системе
+        Planet earth = new Planet("Земля", 5.972e24, 6371, 149.6, 365.25);
+        Star sun = new Star("Солнце", 1.989e30, 696340, "G2V", 1);
+        
+        // Вывод информации о каждом космическом теле
+        System.out.println("Планета:");
+        earth.printInfo();
+        
+        System.out.println("\nЗвезда:");
+        sun.printInfo();
+    }
+}
+
+//Класс `CelestialBody` представляет абстракцию космического тела. У него есть свойства `name`, `mass` и `radius`, которые представляют имя, массу и радиус космического тела соответственно. Метод `printInfo` позволяет вывести информацию о космическом теле, такую как его имя, масса и радиус.
+//Класс `Planet` наследует от `CelestialBody` и представляет модель планеты. Он имеет дополнительные свойства, такие как `distanceFromSun` (расстояние от планеты до Солнца) и `orbitalPeriod` (орбитальный период вокруг Солнца). Метод `printInfo` в этом классе переопределен для вывода дополнительной информации о планете.
+//Класс `Star` также наследует от `CelestialBody` и моделирует звезду. Он содержит дополнительные свойства, такие как `spectralClass` (спектральный класс звезды) и `luminosity` (светимость звезды). Метод `printInfo` в этом классе также переопределен для вывода дополнительной информации о звезде.
+//Таким образом, эта иерархия моделирует космические объекты в солнечной системе, такие как планеты и звезды, и предоставляет методы для вывода информации о них на русском языке.
